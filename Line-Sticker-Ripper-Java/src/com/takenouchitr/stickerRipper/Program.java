@@ -1,8 +1,7 @@
 package com.takenouchitr.stickerRipper;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.*;
 import java.net.*;
 import javax.swing.*;
@@ -11,9 +10,9 @@ import javax.swing.*;
 public class Program extends JFrame
 {
 	private static final String REGEX_URL = "^https://store.line.me/stickershop/product/\\d+/*\\w*$";
-	private static final String REGEX_TITLE = "<p class=\"mdCMN38Item01Ttl\">(.*)</p>[\\s]*</div>"
-			+ "[\\s]*<a class=\"mdCMN38Item01Author";
+	private static final String REGEX_TITLE = "<p class=\"mdCMN38Item01Ttl\">(.*?)</p>";
 	private static final String REGEX_IMAGE = "background-image:url\\(([\\w\\d:/\\.\\-]*);";
+	private static final String REGEX_CHAR_CODE = "&.*?;";
 	private static final String REGEX_ILLEGAL = "([\\/:*?\"<>|])";
 	
 	private JTextField txt_url;
@@ -116,7 +115,9 @@ public class Program extends JFrame
 		imageMatch.find();
 		
 		String title = titleMatch.group(1);
-		//title = title.replaceAll(REGEX_ILLEGAL, " ");
+		title = title.replaceAll(REGEX_ILLEGAL, " ");
+		title = title.replaceAll(REGEX_CHAR_CODE, " ");
+		title = title.trim();
 		
 		lbl_title.setText("Title: " + title);
 		lbl_count.setText("Sticker Count: " + (files.size() / 2));
