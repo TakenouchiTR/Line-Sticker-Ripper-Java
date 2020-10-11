@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Program extends JFrame
 {
 	private static final String REGEX_URL = "^https://store.line.me/stickershop/product/\\d+/*\\w*$";
-	private static final String REGEX_TITLE = "<p class=\"mdCMN38Item01Ttl\">(.*?)</p>";
+	private static final String REGEX_TITLE = "<p class=\"mdCMN38Item01Ttl\" data-test=\".*\">(.*?)</p>";
 	private static final String REGEX_IMAGE = "background-image:url\\(([\\w\\d:/\\.\\-]*);";
 	private static final String REGEX_CHAR_CODE = "&.*?;";
 	private static final String REGEX_ILLEGAL = "([\\/:*?\"<>|])";
